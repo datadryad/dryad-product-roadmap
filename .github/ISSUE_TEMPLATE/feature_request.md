@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-**Problem description, and links to relevant helpdesk tickets: **
+**Problem description, and links to relevant helpdesk tickets:**
 
-**Describe the solution you'd like: **
+**Describe the solution you'd like:**
 
-**Additional context: **
+**Additional context:**
