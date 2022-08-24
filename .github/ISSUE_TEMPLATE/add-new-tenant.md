@@ -13,7 +13,7 @@ assignees: ''
 
 **Contacts to receive submission notices:** 
 
-**Shibboleth info, if not in InCommon:**
+**Shibboleth info, if not in InCommon search https://incommon.org/community-organizations/:**
 
 Tasks:
 - [ ] add config to dryad-config repo
