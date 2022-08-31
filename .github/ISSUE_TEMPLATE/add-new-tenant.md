@@ -20,3 +20,4 @@ Tasks:
 - [ ] add logo to dryad-app repo
 - [ ] deploy and test on stage (institution should log in to verify working as expected)
 - [ ] update tenant_id for users in the database who have emails with the institutional domain name
+- [ ] add institution's name to the Dryad website 
