@@ -1,5 +1,5 @@
 ---
-name: Add new tenant
+name: Add new institutional tenant
 about: Add a tenant for a Dryad member institution
 title: 'Add Tenant: [InstitutionName]'
 labels: ''
