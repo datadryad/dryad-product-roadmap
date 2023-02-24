@@ -18,7 +18,6 @@ assignees: ''
 **Shibboleth info, if not in [InCommon](https://incommon.org/community-organizations/):**
 
 Tasks:
-- [ ] send [Technical Welcome Message](https://docs.google.com/document/d/14NmHkg__5xOgkg5fTeizuaqOwCcLlKinouMLz9a_BNY/edit?usp=sharing)
 - [ ] add config to dryad-config repo
 - [ ] add logo to dryad-app repo
 - [ ] deploy and test on stage (institution should log in to verify working as expected)
