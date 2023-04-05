@@ -33,7 +33,7 @@ jobs:
           close-previous: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  create_issue:
+  create_issue2:
     name: Journal clean ticket
     runs-on: ubuntu-latest
     permissions:
