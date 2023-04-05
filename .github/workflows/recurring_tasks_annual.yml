@@ -35,7 +35,7 @@ jobs:
           close-previous: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  create_issue:
+  create_issue2:
     name: Create helpdesk review ticket
     runs-on: ubuntu-latest
     permissions:
@@ -52,7 +52,7 @@ jobs:
           close-previous: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  create_issue:
+  create_issue3:
     name: Create ROR update ticket
     runs-on: ubuntu-latest
     permissions:
