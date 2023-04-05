@@ -10,37 +10,25 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Daily recurring ticket
+name: Monthly recurring tickets
 on:
   schedule:
-    - cron: 0 1 * * *
+    - cron: 0 1 1 * *
 
 jobs:
   create_issue:
-    name: Create recurring ticket
+    name: Shopping cart update ticket
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - name: Test recurring ticket
+      - name: Recurring ticket
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
         with:
-          assignees: "ryscher"
-          labels: "Testing"
-          title: "Test recurring ticket"
+          labels: "maintenance"
+          title: "MONTHLY: Update shopping cart reports"
           body: |
-            ### RECURRING: Some great ticket
-            (created by `recurring_tasks.yml`)
-
-            - [ ] Start the recording
-            - [ ] Check-ins
-            - [ ] Discussion points
-            - [ ] Post the recording
-                    
-            ### Discussion Points
-            Add things to discuss below
-
-            - [Work this week](https://github.com/orgs/github/projects/3)
+            (created by `recurring_tasks_monthly.yml`)
           pinned: false
           close-previous: true
         env:

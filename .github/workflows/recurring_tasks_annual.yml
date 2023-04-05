@@ -1,0 +1,71 @@
+# Action to create tasks on a set schedule, from
+# https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: Annual recurring tickets (July 1)
+on:
+  schedule:
+    - cron: 0 1 1 7 *
+
+jobs:
+  create_issue:
+    name: Fee waiver update ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "ANNUAL: Update fee waiver countries"
+          body: |
+            (created by `recurring_tasks_annual.yml`)
+
+            https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue:
+    name: Create helpdesk review ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "ANNUAL: Review helpdesk queries to identify common problems"
+          body: |
+            (created by `recurring_tasks_annual.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue:
+    name: Create ROR update ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "ANNUAL: Send new affiliations to ROR"
+          body: |
+            (created by `recurring_tasks_annual.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

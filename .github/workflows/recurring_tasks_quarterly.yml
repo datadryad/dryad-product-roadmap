@@ -1,0 +1,87 @@
+# Action to create tasks on a set schedule, from
+# https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: Quarterly recurring ticket
+on:
+  schedule:
+    - cron: 0 1 1 1,4,7,10 *
+
+jobs:
+  create_issue:
+    name: Salesforce sync ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "QUARTERLY: Sync journals with Salesforce"
+          body: |
+            (created by `recurring_tasks_quarterly.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue:
+    name: Journal clean ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "QUARTERLY: Clean journals with asterisks"
+          body: |
+            (created by `recurring_tasks_quarterly.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue:
+    name: Institution clean ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "QUARTERLY: Clean institutions with asterisks"
+          body: |
+            (created by `recurring_tasks_quarterly.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue:
+    name: Gem update ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "QUARTERLY: Update gem dependencies"
+          body: |
+            (created by `recurring_tasks_quarterly.yml`)
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
