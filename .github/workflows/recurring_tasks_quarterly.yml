@@ -10,7 +10,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Quarterly recurring ticket
+name: Quarterly recurring tickets
 on:
   schedule:
     - cron: 0 1 1 1,4,7,10 *

@@ -30,7 +30,8 @@ jobs:
           body: |
             (created by `recurring_tasks_annual.yml`)
 
-            https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+            - [ ] Update config from list at https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+	    - [ ] Update link to article in `app/views/layouts/_faq.html.md`
           pinned: false
           close-previous: true
         env:

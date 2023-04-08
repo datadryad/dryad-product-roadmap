@@ -33,3 +33,23 @@ jobs:
           close-previous: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  create_issue2:
+    name: Monthly reporting ticket
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          labels: "maintenance"
+          title: "MONTHLY: Reporting"
+          body: |
+            (created by `recurring_tasks_monthly.yml`)
+
+	    - [ ] Monthly report for Dryad board
+	    - [ ] GREI progress report
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
