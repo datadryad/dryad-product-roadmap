@@ -11,4 +11,4 @@ assignees: ''
 
 **Steps to reproduce:**
 
-**Expected behavior: **
+**Expected behavior:**
