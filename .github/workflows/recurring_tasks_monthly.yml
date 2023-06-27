@@ -39,7 +39,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Recurring ticket
+      - name: Recurring reporting
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
         with:
           labels: "maintenance"

@@ -46,6 +46,7 @@ jobs:
           title: "QUARTERLY: Clean journals with asterisks"
           body: |
             (created by `recurring_tasks_quarterly.yml`)
+	    See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/apis/journals.md#cleaning-journal-names
           pinned: false
           close-previous: true
         env:
@@ -63,6 +64,7 @@ jobs:
           title: "QUARTERLY: Clean institutions with asterisks"
           body: |
             (created by `recurring_tasks_quarterly.yml`)
+	    See See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/technical_notes/affiliations.md#cleaning-affiliation-names
           pinned: false
           close-previous: true
         env:
