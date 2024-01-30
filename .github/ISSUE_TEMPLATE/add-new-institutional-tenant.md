@@ -17,6 +17,8 @@ assignees: ''
 
 **Shibboleth info, if not in [InCommon](https://incommon.org/community-organizations/):**
 
+**Membership model:**
+
 Tasks:
 - [ ] add config to `config/tenants`
 - [ ] add logo to `app/assets/images/tenants`
