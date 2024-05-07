@@ -1,15 +1,6 @@
 # Action to create tasks on a set schedule, from
 # https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
 name: Quarterly recurring tickets
 on:
   schedule:
@@ -23,16 +14,34 @@ jobs:
       issues: write
     steps:
       - name: Recurring ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "QUARTERLY: Sync journals with Salesforce"
-          body: |
-            (created by `recurring_tasks_quarterly.yml`)
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "QUARTERLY: Sync journals with Salesforce"
+          body: |
+            (created by `recurring_tasks_quarterly.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: true
   create_issue2:
     name: Journal clean ticket
     runs-on: ubuntu-latest
@@ -40,17 +49,35 @@ jobs:
       issues: write
     steps:
       - name: Recurring ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "QUARTERLY: Clean journals with asterisks"
-          body: |
-            (created by `recurring_tasks_quarterly.yml`)
-	    See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/apis/journals.md#cleaning-journal-names
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "QUARTERLY: Clean journals with asterisks"
+          BODY: |
+            See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/apis/journals.md#cleaning-journal-names
+            (created by `recurring_tasks_quarterly.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: true
   create_issue3:
     name: Institution clean ticket
     runs-on: ubuntu-latest
@@ -58,17 +85,35 @@ jobs:
       issues: write
     steps:
       - name: Recurring ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "QUARTERLY: Clean institutions with asterisks"
-          body: |
-            (created by `recurring_tasks_quarterly.yml`)
-	    See See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/technical_notes/affiliations.md#cleaning-affiliation-names
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TTILE: "QUARTERLY: Clean institutions with asterisks"
+          BODY: |
+            See https://github.com/CDL-Dryad/dryad-app/blob/main/documentation/technical_notes/affiliations.md#cleaning-affiliation-names
+            (created by `recurring_tasks_quarterly.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: true
   create_issue4:
     name: Gem update ticket
     runs-on: ubuntu-latest
@@ -77,13 +122,31 @@ jobs:
     steps:
       - name: Recurring ticket
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "QUARTERLY: Update gem dependencies"
-          body: |
-            (created by `recurring_tasks_quarterly.yml`)
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "QUARTERLY: Update gem dependencies"
+          BODY: |
+            (created by `recurring_tasks_quarterly.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: true

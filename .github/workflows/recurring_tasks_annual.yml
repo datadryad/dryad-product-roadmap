@@ -1,15 +1,6 @@
 # Action to create tasks on a set schedule, from
 # https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
 name: Annual recurring tickets (July 1)
 on:
   schedule:
@@ -23,19 +14,36 @@ jobs:
       issues: write
     steps:
       - name: Recurring ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "ANNUAL: Update fee waiver countries"
-          body: |
-            (created by `recurring_tasks_annual.yml`)
-
-            - [ ] Update config from list at https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
-	    - [ ] Update link to article in `app/views/layouts/_faq.html.md`
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TITLE: "ANNUAL: Update fee waiver countries"
+          labels: "maintenance"
+          BODY: |
+            - [ ] Update config from list at https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+            - [ ] Update link to article in `app/views/layouts/_faq.html.md`
+            (created by `recurring_tasks_annual.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: false
   create_issue2:
     name: Create helpdesk review ticket
     runs-on: ubuntu-latest
@@ -43,16 +51,34 @@ jobs:
       issues: write
     steps:
       - name: Recurring ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "ANNUAL: Review helpdesk queries to identify common problems"
-          body: |
-            (created by `recurring_tasks_annual.yml`)
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "ANNUAL: Review helpdesk queries to identify common problems"
+          BODY: |
+            (created by `recurring_tasks_annual.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: false
   create_issue3:
     name: Create ROR update ticket
     runs-on: ubuntu-latest
@@ -60,13 +86,31 @@ jobs:
       issues: write
     steps:
       - name: ROR ticket
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
-        with:
-          labels: "maintenance"
-          title: "ANNUAL: Send new affiliations to ROR"
-          body: |
-            (created by `recurring_tasks_annual.yml`)
-          pinned: false
-          close-previous: true
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "ANNUAL: Send new affiliations to ROR"
+          BODY: |
+            (created by `recurring_tasks_annual.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: false
