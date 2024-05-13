@@ -49,7 +49,6 @@ jobs:
       issues: write
     steps:
       - name: Recurring reporting
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
         run: |
           if [[ $CLOSE_PREVIOUS == true ]]; then
             previous_issue_number=$(gh issue list \
