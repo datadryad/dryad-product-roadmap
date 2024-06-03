@@ -72,8 +72,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           LABELS: "maintenance"
-          title: "MONTHLY: Reporting"
-          body: |
+          TITLE: "MONTHLY: Reporting"
+          BODY: |
             - [ ] Monthly report for Dryad board
             - [ ] GREI progress report
             (created by `recurring_tasks_monthly.yml`)

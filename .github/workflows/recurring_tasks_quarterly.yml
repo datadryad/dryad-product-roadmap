@@ -38,7 +38,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           LABELS: "maintenance"
           TITLE: "QUARTERLY: Sync journals with Salesforce"
-          body: |
+          BODY: |
             (created by `recurring_tasks_quarterly.yml`)
           PINNED: false
           CLOSE_PREVIOUS: true
