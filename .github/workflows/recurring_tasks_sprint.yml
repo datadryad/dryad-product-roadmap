@@ -1,0 +1,74 @@
+# Action to create tasks on a set schedule, from
+# https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation
+
+# See https://github.com/wham/bi-weekly-action/tree/main
+
+name: Sprint recurring tickets
+on:
+  schedule:
+    - cron: '0 1 * * 2'
+env:
+  FIRST_RUN_DATE: 2024-07-16
+jobs:
+  weekindex:
+    runs-on: ubuntu-latest
+    outputs:
+      weekindex: ${{ steps.calculate.outputs.weekindex }}
+    steps:
+      - name: Calculate weekdiff
+        id: calculate
+        run: |
+          current_date=$(date +%Y-%m-%d)
+          start=$(date -d ${{ env.FIRST_RUN_DATE }} +%s)
+          end=$(date -d $current_date +%s)
+          weekdiff=$(((end-start) / 60 / 60 / 24 / 7))
+          weekindex=$((weekdiff % 2))
+          echo "weekindex=$weekindex" >> "$GITHUB_OUTPUT"
+          echo "FIRST_RUN_DATE: ${{ env.FIRST_RUN_DATE }}" >> $GITHUB_STEP_SUMMARY
+          echo "current_date: $current_date" >> $GITHUB_STEP_SUMMARY
+          echo "weekdiff: $weekdiff" >> $GITHUB_STEP_SUMMARY
+          echo "weekindex: $weekindex" >> $GITHUB_STEP_SUMMARY
+          if [ $weekindex -eq 0 ]; then
+            echo "🟢 It's the first week of the bi-weekly cycle. The action is going to run." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "🔴 It's the second week of the bi-weekly cycle. The action is going to be skipped." >> $GITHUB_STEP_SUMMARY
+          fi
+  create_issue:
+    name: Check submission queue ticket
+    if: ${{ needs.weekindex.outputs.weekindex == 0 }}
+    runs-on: ubuntu-latest
+    needs:
+      - weekindex
+    permissions:
+      issues: write
+    steps:
+      - name: Recurring ticket
+        run: |
+          if [[ $CLOSE_PREVIOUS == true ]]; then
+            previous_issue_number=$(gh issue list \
+              --label "$LABELS" \
+              --json number \
+              --jq '.[0].number')
+            if [[ -n $previous_issue_number ]]; then
+              gh issue close "$previous_issue_number"
+              gh issue unpin "$previous_issue_number"
+            fi
+          fi
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LABELS: "maintenance"
+          TITLE: "EVERY SPRINT: Check submission queue"
+          BODY: |
+            Check and clear the errored submissions at https://datadryad.org/stash/submission_queue
+            (created by `recurring_tasks_sprint.yml`)
+          PINNED: false
+          CLOSE_PREVIOUS: true
