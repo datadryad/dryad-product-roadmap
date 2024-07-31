@@ -47,7 +47,7 @@ jobs:
           if [[ $CLOSE_PREVIOUS == true ]]; then
             previous_issue_number=$(gh issue list \
               --label "$LABELS" \
-              --json search "$TITLE" \
+              --json search '$TITLE' \
               --json number \
               --jq '.[0].number')
             if [[ -n $previous_issue_number ]]; then
