@@ -3,7 +3,7 @@
 
 name: Annual recurring tickets (July 1)
 on:
-  workflow_dispatch
+  workflow_dispatch:
   schedule:
     - cron: 0 1 1 7 *
 
