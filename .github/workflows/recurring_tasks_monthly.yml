@@ -3,6 +3,7 @@
 
 name: Monthly recurring tickets
 on:
+  workflow_dispatch
   schedule:
     - cron: 0 1 1 * *
 

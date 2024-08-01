@@ -3,6 +3,7 @@
 
 name: Quarterly recurring tickets
 on:
+  workflow_dispatch
   schedule:
     - cron: 0 1 1 1,4,7,10 *
 
