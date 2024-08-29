@@ -2,7 +2,7 @@
 name: Add new publisher/journal
 about: Add settings for a new agreement with a publisher or journal
 title: 'Add publisher/journal: [Name]'
-labels: ''
+labels: 'new journal'
 assignees: ''
 
 ---
