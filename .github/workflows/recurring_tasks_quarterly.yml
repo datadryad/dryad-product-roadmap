@@ -115,8 +115,9 @@ jobs:
           TITLE: "QUARTERLY: Clean unmatched instituions"
           BODY: |
             See 
-              * https://github.com/datadryad/dryad-app/blob/main/documentation/technical_notes/affiliations.md#cleaning-affiliation-names
-              * https://github.com/datadryad/dryad-app/blob/main/documentation/technical_notes/contributors.md#cleaning-contributor-names
+            - [Cleaning affiliation names](https://github.com/datadryad/dryad-app/blob/main/documentation/technical_notes/affiliations.md#cleaning-affiliation-names)
+            - [Cleaning contributor names](https://github.com/datadryad/dryad-app/blob/main/documentation/technical_notes/contributors.md#cleaning-contributor-names)
+
             (created by `recurring_tasks_quarterly.yml`)
           PINNED: false
           CLOSE_PREVIOUS: true
