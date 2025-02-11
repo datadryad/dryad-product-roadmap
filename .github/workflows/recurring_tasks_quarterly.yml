@@ -41,7 +41,7 @@ jobs:
           LABELS: "maintenance"
           TITLE: "QUARTERLY: Sync journals with Salesforce"
           BODY: |
-            `bundle exec rails journals:check_salesforce_sync`
+            `bundle exec rails journals:check_salesforce_sync -- --dry_run=false`
             (created by `recurring_tasks_quarterly.yml`)
           PINNED: false
           CLOSE_PREVIOUS: true
