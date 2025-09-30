@@ -2,7 +2,7 @@
 name: Add new institutional tenant
 about: Add a tenant for a Dryad member institution
 title: 'Add Tenant: [InstitutionName]'
-labels: 'new tenant'
+labels: bug, new tenant
 assignees: ''
 
 ---
